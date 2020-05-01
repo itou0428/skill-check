@@ -1,5 +1,7 @@
 package q002;
 
+import java.util.Arrays;
+
 /**
  * Q002 並べ替える
  *
@@ -45,5 +47,20 @@ public class Q002 {
             "14,林",
             "9,清水"
     };
+
+    public static void main(String[] args) {
+        for (int targetIndex = 1; targetIndex < dataList.length; targetIndex++) {
+            for (int cnt = 0; cnt < dataList.length; cnt++) {
+                int listIndex = Integer.parseInt(dataList[cnt].split(",", 0)[0]);
+                if (listIndex == targetIndex) {
+                    System.out.println(listIndex + "," + dataList[cnt].split(",", 0)[1]);
+                    targetIndex ++;
+                    cnt = 0;
+                } else {
+                    continue;
+                }
+            }
+        }
+    }
 }
 // 完成までの時間: xx時間 xx分
