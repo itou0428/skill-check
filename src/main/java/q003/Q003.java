@@ -1,6 +1,9 @@
 package q003;
 
-import java.io.InputStream;
+import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Q003 集計と並べ替え
@@ -32,6 +35,40 @@ public class Q003 {
      */
     private static InputStream openDataFile() {
         return Q003.class.getResourceAsStream("data.txt");
+    }
+
+    public static void main(String[] args) {
+        String line;
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(openDataFile()))) {
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+                sb.append(" ");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<String> words = Arrays.asList(sb.toString().split(" "));
+
+        Map<String, Integer> resultMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        for (String word : words) {
+            String replaceWord = word.replace(",", "").replace(";", "").replace(".", "");
+            if (! replaceWord.equals("I")) {
+                replaceWord = replaceWord.toLowerCase();
+            }
+            if (resultMap.containsKey(replaceWord)) {
+                Integer count = resultMap.get(replaceWord);
+                resultMap.put(replaceWord, count + 1);
+            } else {
+                resultMap.put(replaceWord, 1);
+            }
+        }
+
+        // output出力
+        for (Map.Entry<String, Integer> entry : resultMap.entrySet()){
+            System.out.println(entry.getValue() + "=" + entry.getKey());
+        }
     }
 }
 // 完成までの時間: xx時間 xx分
