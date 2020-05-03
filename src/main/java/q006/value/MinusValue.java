@@ -12,6 +12,6 @@ public class MinusValue implements IValue {
         // スタックから2つの値を抜き出し、足し算した結果をスタックに積む
         BigDecimal right = values.pop();
         BigDecimal left = values.pop();
-        values.push(left.add(right));
+        values.push(left.subtract(right));
     }
 }

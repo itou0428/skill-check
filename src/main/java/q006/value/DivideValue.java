@@ -11,6 +11,6 @@ public class DivideValue implements IValue {
     public void execute(Stack<BigDecimal> values) {
         BigDecimal right = values.pop();
         BigDecimal left = values.pop();
-        values.push(left.multiply(right));
+        values.push(left.divide(right));
     }
 }
